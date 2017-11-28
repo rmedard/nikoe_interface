@@ -1,0 +1,7 @@
+name: Nikoe Interface Module
+type: module
+description: 'A Nikoe module handles all GUI manipulations.'
+package: Nikoe Custom Modules
+core: 8.x
+
+version: '8.x-1.0'
