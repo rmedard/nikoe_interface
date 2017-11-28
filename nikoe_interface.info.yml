@@ -4,4 +4,6 @@ description: 'A Nikoe module handles all GUI manipulations.'
 package: Nikoe Custom Modules
 core: 8.x
 
+dependencies:
+  - twig_tweak:twig_tweak
 version: '8.x-1.0'
