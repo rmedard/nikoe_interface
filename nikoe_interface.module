@@ -33,7 +33,7 @@ function nikoe_interface_cron()
     $send = TRUE;
     $result = $mailManager->mail($module, $key, $to, $langcode, $params, $reply, $send);
     Drupal::logger('nikoe_interface')->debug(json_encode($result, true));
-    Drupal::logger('nikoe_interface')->debug($result['params']->result);
+    Drupal::logger('nikoe_interface')->debug('Result=> ' . $result['result']);
 }
 
 /**
