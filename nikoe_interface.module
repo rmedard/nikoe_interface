@@ -7,12 +7,52 @@
 /**
  * Implements hook_theme().
  */
-function nikoe_interface_theme($existing, $type, $theme, $path) {
-		return [
-			'nikoe_copyright' => [
-				'variables' => [
-					'year' => date('Y')
-				]
-			],
-		];
+function nikoe_interface_theme($existing, $type, $theme, $path)
+{
+    return [
+        'nikoe_copyright' => [
+            'variables' => [
+                'year' => date('Y')
+            ]
+        ],
+    ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function nikoe_interface_cron()
+{
+    $mailManager = Drupal::service('plugin.manager.mail');
+    $module = 'nikoe_interface';
+    $key = 'test_email';
+    $to = 'medard.rebero@gmail.com';
+    $reply = Drupal::config('system.site')->get('mail');
+    $params['message'] = 'This is a stupid email...';
+    $langcode = Drupal::currentUser()->getPreferredLangcode();
+    $send = TRUE;
+    $result = $mailManager->mail($module, $key, $to, $langcode, $params, $reply, $send);
+    kint($result);
+    die();
+}
+
+/**
+ * Implements hook_cron().
+ */
+/**
+ * Implements hook_mail().
+ */
+function nikoe_interface_mail($key, &$message, $params)
+{
+    $options = [
+        'langcode' => $message['langcode'],
+    ];
+    switch ($key){
+        case 'test_email':
+            $message['from'] = Drupal::config('system.site')
+                    ->get('name') . ' <' . Drupal::config('system.site')->get('mail') . '>';
+            $message['subject'] = t('Alert: Test Email', $options);
+            $message['body'][] = $params['message'];
+            break;
+    }
 }
