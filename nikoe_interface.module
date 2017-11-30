@@ -32,7 +32,7 @@ function nikoe_interface_cron()
     $langcode = Drupal::currentUser()->getPreferredLangcode();
     $send = TRUE;
     $result = $mailManager->mail($module, $key, $to, $langcode, $params, $reply, $send);
-    if ($result['result'] === '1'){
+    if ($result['result'] !== '1'){
         Drupal::logger('nikoe_interface')->error('Email failed...');
     } else {
         Drupal::logger('nikoe_interface')->info('Email success... ' . $result['result']);
