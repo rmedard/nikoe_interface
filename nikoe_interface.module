@@ -35,7 +35,7 @@ function nikoe_interface_cron()
     if ($result['result'] === '1'){
         Drupal::logger('nikoe_interface')->error('Email failed...');
     } else {
-        Drupal::logger('nikoe_interface')->error('Email success... ' . $result['result']);
+        Drupal::logger('nikoe_interface')->info('Email success... ' . $result['result']);
     }
 }
 
